@@ -2,17 +2,40 @@
 session_start();
 require_once __DIR__ . '/../classes/Auth.php';
 require_once __DIR__ . '/../classes/Event.php';
+require_once __DIR__ . '/../classes/NotificationService.php';
 
 $auth = new Auth();
 $event = new Event();
+$notificationService = new NotificationService();
 
-// Get events untuk bulan ini
+// Jika admin sudah login, redirect ke admin dashboard
+if ($auth->isLoggedIn() && $auth->isAdmin()) {
+    header('Location: admin/index.php');
+    exit;
+}
+// Cleanup event yang sudah lewat
+$event->cleanupPastEvents();
+
+// Check untuk upcoming events notifications
+$notificationService->checkUpcomingEvents();
+
+// GET EVENTS BULAN INI - VERSI SIMPLE
 $current_month = date('m');
 $current_year = date('Y');
+
+// Debug: cek nilai month dan year
+// echo "Debug: Month = $current_month, Year = $current_year";
+
 $events_this_month = $event->getEventsByMonth($current_month, $current_year, 6);
 
 // Get all events untuk calendar
 $all_events = $event->getAllEvents();
+
+// Get user notifications jika sudah login
+$userNotifications = [];
+if ($auth->isLoggedIn()) {
+    $userNotifications = $notificationService->getUserNotifications($_SESSION['user_id']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -102,6 +125,27 @@ $all_events = $event->getAllEvents();
                                 <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                             </ul>
                         </div>
+                        <!-- Notification Bell -->
+                        <?php if ($auth->isLoggedIn() && !empty($userNotifications)): ?>
+                        <div class="nav-item dropdown">
+                            <a class="nav-link position-relative" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown">
+                                🔔
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    <?= count($userNotifications) ?>
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <?php foreach($userNotifications as $notif): ?>
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        <strong><?= htmlspecialchars($notif['title']) ?></strong><br>
+                                        <small><?= htmlspecialchars($notif['message']) ?></small>
+                                    </a>
+                                </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                        <?php endif; ?>
                     <?php else: ?>
                         <!-- Tampilan sebelum login -->
                         <a class="nav-link" href="login.php">Login</a>
@@ -129,24 +173,42 @@ $all_events = $event->getAllEvents();
             <div class="container">
                 <div class="month-header text-center">
                     <h3 class="mb-0">Event Bulan <?= date('F Y') ?></h3>
+                    <small class="text-light">Menampilkan event kampus bulan ini</small>
                 </div>
                 
-                <div class="row">
-                    <?php if (!empty($events_this_month)): ?>
-                        <?php foreach($events_this_month as $event): ?>
+                <?php if (empty($events_this_month)): ?>
+                    <!-- HANYA TAMPIL JIKA TIDAK ADA EVENT -->
+                    <div class="text-center py-5">
+                        <div class="alert alert-info mx-auto" style="max-width: 500px;">
+                            <h4>📅 Tidak ada event</h4>
+                            <p>Belum ada event yang dijadwalkan untuk bulan <?= date('F Y') ?>.</p>
+                            
+                            <?php if ($auth->isLoggedIn() && $auth->isAdmin()): ?>
+                                <a href="admin/events.php" class="btn btn-success">➕ Buat Event Baru</a>
+                            <?php elseif ($auth->isLoggedIn()): ?>
+                                <p class="text-muted mb-0">Hubungi admin untuk menambahkan event.</p>
+                            <?php else: ?>
+                                <a href="login.php" class="btn btn-primary">Login</a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <!-- TAMPIL JIKA ADA EVENT -->
+                    <div class="row">
+                        <?php foreach($events_this_month as $event_item): ?>
                         <div class="col-md-4 mb-4">
                             <div class="card event-card shadow">
                                 <div class="card-body">
-                                    <h5 class="card-title"><?= htmlspecialchars($event['title']) ?></h5>
+                                    <h5 class="card-title"><?= htmlspecialchars($event_item['title']) ?></h5>
                                     <p class="card-text text-muted">
-                                        📅 <?= date('d M Y', strtotime($event['event_date'])) ?><br>
-                                        ⏰ <?= $event['event_time'] ?><br>
-                                        📍 <?= htmlspecialchars($event['location']) ?>
+                                        📅 <?= date('d M Y', strtotime($event_item['event_date'])) ?><br>
+                                        ⏰ <?= $event_item['event_time'] ?><br>
+                                        📍 <?= htmlspecialchars($event_item['location']) ?>
                                     </p>
-                                    <p class="card-text"><?= htmlspecialchars(substr($event['description'], 0, 100)) ?>...</p>
+                                    <p class="card-text"><?= htmlspecialchars(substr($event_item['description'], 0, 100)) ?>...</p>
                                     
                                     <?php if ($auth->isLoggedIn()): ?>
-                                        <a href="event_detail.php?id=<?= $event['id'] ?>" class="btn btn-primary">Detail Event</a>
+                                        <a href="event_detail.php?id=<?= $event_item['id'] ?>" class="btn btn-primary">Detail Event</a>
                                     <?php else: ?>
                                         <a href="login.php" class="btn btn-outline-primary">Login untuk Daftar</a>
                                     <?php endif; ?>
@@ -154,19 +216,13 @@ $all_events = $event->getAllEvents();
                             </div>
                         </div>
                         <?php endforeach; ?>
-                        
-                        <!-- More Events Button -->
-                        <div class="col-12 text-center mt-4">
-                            <a href="events.php" class="btn btn-outline-primary btn-lg">More Events</a>
-                        </div>
-                        
-                    <?php else: ?>
-                        <div class="col-12 text-center">
-                            <p class="text-muted">Tidak ada event di bulan <?= date('F Y') ?>.</p>
-                            <a href="events.php" class="btn btn-primary">Lihat Semua Events</a>
-                        </div>
-                    <?php endif; ?>
-                </div>
+                    </div>
+                    
+                    <!-- More Events Button -->
+                    <div class="text-center mt-4">
+                        <a href="events.php" class="btn btn-outline-primary btn-lg">Lihat Semua Events</a>
+                    </div>
+                <?php endif; ?>
             </div>
         </section>
 

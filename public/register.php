@@ -6,6 +6,8 @@ require_once __DIR__ . '/../classes/Auth.php';
 $auth = new Auth();
 $message = '';
 $error = '';
+$name = '';
+$email = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'] ?? '';
@@ -29,6 +31,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+
+// Redirect if already logged in
+if ($auth->isLoggedIn()) {
+    if ($auth->isAdmin()) {
+        header('Location: admin/index.php');
+    } else {
+        header('Location: index.php');
+    }
+    exit;
+}
+?>
 
 // Redirect if already logged in
 if ($auth->isLoggedIn()) {

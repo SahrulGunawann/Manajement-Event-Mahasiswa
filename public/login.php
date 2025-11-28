@@ -5,13 +5,20 @@ require_once __DIR__ . '/../classes/Auth.php';
 
 $auth = new Auth();
 $error = '';
+$email = ''; // Inisialisasi variabel email
+$password = ''; // Inisialisasi variabel password
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
     
     if ($auth->login($email, $password)) {
-        header('Location: index.php');
+        // Redirect ke admin dashboard jika admin, ke user dashboard jika user
+        if ($auth->isAdmin()) {
+            header('Location: admin/index.php');
+        } else {
+            header('Location: index.php');
+        }
         exit;
     } else {
         $error = 'Email atau password salah!';
@@ -20,7 +27,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // Redirect if already logged in
 if ($auth->isLoggedIn()) {
-    header('Location: index.php');
+    if ($auth->isAdmin()) {
+        header('Location: admin/index.php');
+    } else {
+        header('Location: index.php');
+    }
     exit;
 }
 ?>
@@ -61,7 +72,7 @@ if ($auth->isLoggedIn()) {
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control" id="email" name="email" required 
-                                   value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '' ?>">
+                                   value="<?= htmlspecialchars($email) ?>">
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>

@@ -1,0 +1,1004 @@
+{
+ "kind": "calendar#events",
+ "etag": "\"p325dblm9oea920o\"",
+ "summary": "Hari libur di Indonesia",
+ "description": "Hari libur dan perayaan di Indonesia",
+ "updated": "2025-11-23T10:19:30.377Z",
+ "timeZone": "UTC",
+ "accessRole": "reader",
+ "defaultReminders": [],
+ "items": [
+  {
+   "kind": "calendar#event",
+   "etag": "\"3432777436036000\"",
+   "id": "20251224_l0k3u6ntli9048lt9is90c1ua4",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNTEyMjRfbDBrM3U2bnRsaTkwNDhsdDlpczkwYzF1YTQgaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2024-05-22T14:38:38.000Z",
+   "updated": "2024-05-22T14:38:38.018Z",
+   "summary": "Malam Natal",
+   "description": "Perayaan\nUntuk menyembunyikan kalender perayaan, buka Setelan Google Kalender \u003e Hari libur di Indonesia",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2025-12-24"
+   },
+   "end": {
+    "date": "2025-12-25"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20251224_l0k3u6ntli9048lt9is90c1ua4@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3432777427692000\"",
+   "id": "20251225_b7v0qnek2a5qf7nf96tfeg0mkk",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNTEyMjVfYjd2MHFuZWsyYTVxZjduZjk2dGZlZzBta2sgaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2024-05-22T14:38:33.000Z",
+   "updated": "2024-05-22T14:38:33.846Z",
+   "summary": "Hari Raya Natal",
+   "description": "Hari libur nasional",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2025-12-25"
+   },
+   "end": {
+    "date": "2025-12-26"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20251225_b7v0qnek2a5qf7nf96tfeg0mkk@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3459518786770000\"",
+   "id": "20251226_crklv6e1ketbb7sh7c9rpv8iho",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNTEyMjZfY3JrbHY2ZTFrZXRiYjdzaDdjOXJwdjhpaG8gaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2024-10-24T08:43:13.000Z",
+   "updated": "2024-10-24T08:43:13.385Z",
+   "summary": "Cuti Bersama Natal (Hari Tinju)",
+   "description": "Hari libur nasional",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2025-12-26"
+   },
+   "end": {
+    "date": "2025-12-27"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20251226_crklv6e1ketbb7sh7c9rpv8iho@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3432777440306000\"",
+   "id": "20251231_qfuh1mjr99kp2pudrpthrsrdao",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNTEyMzFfcWZ1aDFtanI5OWtwMnB1ZHJwdGhyc3JkYW8gaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2024-05-22T14:38:40.000Z",
+   "updated": "2024-05-22T14:38:40.153Z",
+   "summary": "Malam Tahun Baru",
+   "description": "Perayaan\nUntuk menyembunyikan kalender perayaan, buka Setelan Google Kalender \u003e Hari libur di Indonesia",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2025-12-31"
+   },
+   "end": {
+    "date": "2026-01-01"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20251231_qfuh1mjr99kp2pudrpthrsrdao@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3517232406100350\"",
+   "id": "20260101_t8rmfdtsfkthvl1ar3bqagnh7s",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNjAxMDFfdDhybWZkdHNma3RodmwxYXIzYnFhZ25oN3MgaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2025-09-23T08:30:03.000Z",
+   "updated": "2025-09-23T08:30:03.050Z",
+   "summary": "Hari Tahun Baru",
+   "description": "Hari libur nasional",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2026-01-01"
+   },
+   "end": {
+    "date": "2026-01-02"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20260101_t8rmfdtsfkthvl1ar3bqagnh7s@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3517405408322558\"",
+   "id": "20260116_va1jjluhr78rnetkgad86dt888",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNjAxMTZfdmExampsdWhyNzhybmV0a2dhZDg2ZHQ4ODggaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2025-09-24T08:31:44.000Z",
+   "updated": "2025-09-24T08:31:44.161Z",
+   "summary": "Isra Mikraj Nabi Muhammad (belum pasti)",
+   "description": "Hari libur nasional\nTanggal bersifat tentatif dan dapat berubah.",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2026-01-16"
+   },
+   "end": {
+    "date": "2026-01-17"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20260116_va1jjluhr78rnetkgad86dt888@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3517405408322558\"",
+   "id": "20260216_a0bb6le0vroh0tt6atd3igd4lk",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNjAyMTZfYTBiYjZsZTB2cm9oMHR0NmF0ZDNpZ2Q0bGsgaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2025-09-24T08:31:44.000Z",
+   "updated": "2025-09-24T08:31:44.161Z",
+   "summary": "Cuti Bersama Tahun Baru Imlek",
+   "description": "Hari libur nasional",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2026-02-16"
+   },
+   "end": {
+    "date": "2026-02-17"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20260216_a0bb6le0vroh0tt6atd3igd4lk@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3517232406100350\"",
+   "id": "20260217_c8hjdoifk6blme07au1lomqbu0",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNjAyMTdfYzhoamRvaWZrNmJsbWUwN2F1MWxvbXFidTAgaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2025-09-23T08:30:03.000Z",
+   "updated": "2025-09-23T08:30:03.050Z",
+   "summary": "Tahun Baru Imlek",
+   "description": "Hari libur nasional",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2026-02-17"
+   },
+   "end": {
+    "date": "2026-02-18"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20260217_c8hjdoifk6blme07au1lomqbu0@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3517232406100350\"",
+   "id": "20260220_shbr18ov7715gj1al24bktn9u0",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNjAyMjBfc2hicjE4b3Y3NzE1Z2oxYWwyNGJrdG45dTAgaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2025-09-23T08:30:03.000Z",
+   "updated": "2025-09-23T08:30:03.050Z",
+   "summary": "1 Ramadan (belum pasti)",
+   "description": "Perayaan\nUntuk menyembunyikan kalender perayaan, buka Setelan Google Kalender \u003e Hari libur di Indonesia\nTanggal bersifat tentatif dan dapat berubah.",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2026-02-20"
+   },
+   "end": {
+    "date": "2026-02-21"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20260220_shbr18ov7715gj1al24bktn9u0@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3517405408322558\"",
+   "id": "20260318_aqefkivo4ivcaafa848ejrdifc",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNjAzMThfYXFlZmtpdm80aXZjYWFmYTg0OGVqcmRpZmMgaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2025-09-24T08:31:44.000Z",
+   "updated": "2025-09-24T08:31:44.161Z",
+   "summary": "Cuti Bersama Hari Suci Nyepi (Tahun Baru Saka)",
+   "description": "Hari libur nasional",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2026-03-18"
+   },
+   "end": {
+    "date": "2026-03-19"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20260318_aqefkivo4ivcaafa848ejrdifc@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3517405408322558\"",
+   "id": "20260319_dqt58286rfur1j424a10snopqs",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNjAzMTlfZHF0NTgyODZyZnVyMWo0MjRhMTBzbm9wcXMgaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2025-09-24T08:31:44.000Z",
+   "updated": "2025-09-24T08:31:44.161Z",
+   "summary": "Hari Suci Nyepi (Tahun Baru Saka)",
+   "description": "Hari libur nasional",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2026-03-19"
+   },
+   "end": {
+    "date": "2026-03-20"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20260319_dqt58286rfur1j424a10snopqs@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3517405408322558\"",
+   "id": "20260320_fqrrbvq1879gp8c1t6t23m3424",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNjAzMjBfZnFycmJ2cTE4NzlncDhjMXQ2dDIzbTM0MjQgaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2025-09-24T08:31:44.000Z",
+   "updated": "2025-09-24T08:31:44.161Z",
+   "summary": "Cuti Bersama Idul Fitri",
+   "description": "Hari libur nasional",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2026-03-20"
+   },
+   "end": {
+    "date": "2026-03-21"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20260320_fqrrbvq1879gp8c1t6t23m3424@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3517232406100350\"",
+   "id": "20260321_hbomkl1g22mg6eitk4q9ukkec4",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNjAzMjFfaGJvbWtsMWcyMm1nNmVpdGs0cTl1a2tlYzQgaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2025-09-23T08:30:03.000Z",
+   "updated": "2025-09-23T08:30:03.050Z",
+   "summary": "Hari Idul Fitri (belum pasti)",
+   "description": "Hari libur nasional\nTanggal bersifat tentatif dan dapat berubah.",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2026-03-21"
+   },
+   "end": {
+    "date": "2026-03-22"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20260321_hbomkl1g22mg6eitk4q9ukkec4@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3517232406100350\"",
+   "id": "20260322_18c4qh2ikjojo01l1chjrq5qog",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNjAzMjJfMThjNHFoMmlram9qbzAxbDFjaGpycTVxb2cgaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2025-09-23T08:30:03.000Z",
+   "updated": "2025-09-23T08:30:03.050Z",
+   "summary": "Hari Idul Fitri (belum pasti)",
+   "description": "Hari libur nasional\nTanggal bersifat tentatif dan dapat berubah.",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2026-03-22"
+   },
+   "end": {
+    "date": "2026-03-23"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20260322_18c4qh2ikjojo01l1chjrq5qog@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3517405408322558\"",
+   "id": "20260323_a2san25jubj8l5ejfkt5vev5q4",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNjAzMjNfYTJzYW4yNWp1Ymo4bDVlamZrdDV2ZXY1cTQgaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2025-09-24T08:31:44.000Z",
+   "updated": "2025-09-24T08:31:44.161Z",
+   "summary": "Cuti Bersama Idul Fitri",
+   "description": "Hari libur nasional",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2026-03-23"
+   },
+   "end": {
+    "date": "2026-03-24"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20260323_a2san25jubj8l5ejfkt5vev5q4@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3517405408322558\"",
+   "id": "20260324_uls1b3ksagjqt4or9eacq6jvvg",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNjAzMjRfdWxzMWIza3NhZ2pxdDRvcjllYWNxNmp2dmcgaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2025-09-24T08:31:44.000Z",
+   "updated": "2025-09-24T08:31:44.161Z",
+   "summary": "Cuti Bersama Idul Fitri",
+   "description": "Hari libur nasional",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2026-03-24"
+   },
+   "end": {
+    "date": "2026-03-25"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20260324_uls1b3ksagjqt4or9eacq6jvvg@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3517232406100350\"",
+   "id": "20260403_mj8dubgrl13krgphakkpuve33k",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNjA0MDNfbWo4ZHViZ3JsMTNrcmdwaGFra3B1dmUzM2sgaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2025-09-23T08:30:03.000Z",
+   "updated": "2025-09-23T08:30:03.050Z",
+   "summary": "Wafat Isa Almasih",
+   "description": "Hari libur nasional",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2026-04-03"
+   },
+   "end": {
+    "date": "2026-04-04"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20260403_mj8dubgrl13krgphakkpuve33k@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3517405408322558\"",
+   "id": "20260405_asg0gsvj7ivoe6a780nl1pin8g",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNjA0MDVfYXNnMGdzdmo3aXZvZTZhNzgwbmwxcGluOGcgaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2025-09-24T08:31:44.000Z",
+   "updated": "2025-09-24T08:31:44.161Z",
+   "summary": "Hari Paskah",
+   "description": "Hari libur nasional",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2026-04-05"
+   },
+   "end": {
+    "date": "2026-04-06"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20260405_asg0gsvj7ivoe6a780nl1pin8g@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3517232406100350\"",
+   "id": "20260501_7qudrt84mhhfspfhcdshlnf88g",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNjA1MDFfN3F1ZHJ0ODRtaGhmc3BmaGNkc2hsbmY4OGcgaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2025-09-23T08:30:03.000Z",
+   "updated": "2025-09-23T08:30:03.050Z",
+   "summary": "Hari Buruh Internasional / Pekerja",
+   "description": "Hari libur nasional",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2026-05-01"
+   },
+   "end": {
+    "date": "2026-05-02"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20260501_7qudrt84mhhfspfhcdshlnf88g@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3517232406100350\"",
+   "id": "20260514_i732q9pk5gpbea92jigjc17q5s",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNjA1MTRfaTczMnE5cGs1Z3BiZWE5MmppZ2pjMTdxNXMgaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2025-09-23T08:30:03.000Z",
+   "updated": "2025-09-23T08:30:03.050Z",
+   "summary": "Kenaikan Isa Al Masih",
+   "description": "Hari libur nasional",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2026-05-14"
+   },
+   "end": {
+    "date": "2026-05-15"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20260514_i732q9pk5gpbea92jigjc17q5s@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3517405408322558\"",
+   "id": "20260515_np8gjovli77iv6i853vrb5olmo",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNjA1MTVfbnA4Z2pvdmxpNzdpdjZpODUzdnJiNW9sbW8gaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2025-09-24T08:31:44.000Z",
+   "updated": "2025-09-24T08:31:44.161Z",
+   "summary": "Cuti Bersama Kenaikan Isa Al Masih",
+   "description": "Hari libur nasional",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2026-05-15"
+   },
+   "end": {
+    "date": "2026-05-16"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20260515_np8gjovli77iv6i853vrb5olmo@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3517405408322558\"",
+   "id": "20260527_ohua6qoeegdt3b7acuj566jk70",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNjA1Mjdfb2h1YTZxb2VlZ2R0M2I3YWN1ajU2NmprNzAgaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2025-09-24T08:31:44.000Z",
+   "updated": "2025-09-24T08:31:44.161Z",
+   "summary": "Idul Adha (Lebaran Haji) (belum pasti)",
+   "description": "Hari libur nasional\nTanggal bersifat tentatif dan dapat berubah.",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2026-05-27"
+   },
+   "end": {
+    "date": "2026-05-28"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20260527_ohua6qoeegdt3b7acuj566jk70@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3517405408322558\"",
+   "id": "20260528_6fv7ml7o1mlmlhfgpoqard932o",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNjA1MjhfNmZ2N21sN28xbWxtbGhmZ3BvcWFyZDkzMm8gaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2025-09-24T08:31:44.000Z",
+   "updated": "2025-09-24T08:31:44.161Z",
+   "summary": "Idul Adha (Lebaran Haji)",
+   "description": "Hari libur nasional",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2026-05-28"
+   },
+   "end": {
+    "date": "2026-05-29"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20260528_6fv7ml7o1mlmlhfgpoqard932o@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3517232406100350\"",
+   "id": "20260531_26p3nbkvi8c62si5t3pa9alpkk",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNjA1MzFfMjZwM25ia3ZpOGM2MnNpNXQzcGE5YWxwa2sgaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2025-09-23T08:30:03.000Z",
+   "updated": "2025-09-23T08:30:03.050Z",
+   "summary": "Hari Raya Waisak (belum pasti)",
+   "description": "Hari libur nasional\nTanggal bersifat tentatif dan dapat berubah.",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2026-05-31"
+   },
+   "end": {
+    "date": "2026-06-01"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20260531_26p3nbkvi8c62si5t3pa9alpkk@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3517232406100350\"",
+   "id": "20260601_kpo1qvk4hmi9he8cic514mdnsg",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNjA2MDFfa3BvMXF2azRobWk5aGU4Y2ljNTE0bWRuc2cgaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2025-09-23T08:30:03.000Z",
+   "updated": "2025-09-23T08:30:03.050Z",
+   "summary": "Hari Lahir Pancasila",
+   "description": "Hari libur nasional",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2026-06-01"
+   },
+   "end": {
+    "date": "2026-06-02"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20260601_kpo1qvk4hmi9he8cic514mdnsg@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3517405408322558\"",
+   "id": "20260616_n7h64t0s624prutu551em0194s",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNjA2MTZfbjdoNjR0MHM2MjRwcnV0dTU1MWVtMDE5NHMgaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2025-09-24T08:31:44.000Z",
+   "updated": "2025-09-24T08:31:44.161Z",
+   "summary": "Satu Muharam / Tahun Baru Hijriah (belum pasti)",
+   "description": "Hari libur nasional\nTanggal bersifat tentatif dan dapat berubah.",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2026-06-16"
+   },
+   "end": {
+    "date": "2026-06-17"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20260616_n7h64t0s624prutu551em0194s@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3517232406100350\"",
+   "id": "20260817_s7cgupfulug2pftfhs53ic2ngk",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNjA4MTdfczdjZ3VwZnVsdWcycGZ0ZmhzNTNpYzJuZ2sgaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2025-09-23T08:30:03.000Z",
+   "updated": "2025-09-23T08:30:03.050Z",
+   "summary": "Hari Proklamasi Kemerdekaan R.I.",
+   "description": "Hari libur nasional",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2026-08-17"
+   },
+   "end": {
+    "date": "2026-08-18"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20260817_s7cgupfulug2pftfhs53ic2ngk@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3517405408322558\"",
+   "id": "20260825_28ffjveoq6jvsijdagi9c926co",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNjA4MjVfMjhmZmp2ZW9xNmp2c2lqZGFnaTljOTI2Y28gaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2025-09-24T08:31:44.000Z",
+   "updated": "2025-09-24T08:31:44.161Z",
+   "summary": "Maulid Nabi Muhammad (belum pasti)",
+   "description": "Hari libur nasional\nTanggal bersifat tentatif dan dapat berubah.",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2026-08-25"
+   },
+   "end": {
+    "date": "2026-08-26"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20260825_28ffjveoq6jvsijdagi9c926co@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3517405408322558\"",
+   "id": "20261224_4cg7jrb9n1qo6cgnoet5dtc224",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNjEyMjRfNGNnN2pyYjluMXFvNmNnbm9ldDVkdGMyMjQgaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2025-09-24T08:31:44.000Z",
+   "updated": "2025-09-24T08:31:44.161Z",
+   "summary": "Cuti Bersama Natal (Malam Natal)",
+   "description": "Hari libur nasional",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2026-12-24"
+   },
+   "end": {
+    "date": "2026-12-25"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20261224_4cg7jrb9n1qo6cgnoet5dtc224@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3517232406100350\"",
+   "id": "20261225_7fj73iqpthsg2dp9n9gnenr28k",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNjEyMjVfN2ZqNzNpcXB0aHNnMmRwOW45Z25lbnIyOGsgaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2025-09-23T08:30:03.000Z",
+   "updated": "2025-09-23T08:30:03.050Z",
+   "summary": "Hari Raya Natal",
+   "description": "Hari libur nasional",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2026-12-25"
+   },
+   "end": {
+    "date": "2026-12-26"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20261225_7fj73iqpthsg2dp9n9gnenr28k@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"3517232406100350\"",
+   "id": "20261231_81bf5aec4jriue1nad6l34g8a8",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MjAyNjEyMzFfODFiZjVhZWM0anJpdWUxbmFkNmwzNGc4YTggaWQuaW5kb25lc2lhbiNob2xpZGF5QHY",
+   "created": "2025-09-23T08:30:03.000Z",
+   "updated": "2025-09-23T08:30:03.050Z",
+   "summary": "Malam Tahun Baru",
+   "description": "Perayaan\nUntuk menyembunyikan kalender perayaan, buka Setelan Google Kalender \u003e Hari libur di Indonesia",
+   "creator": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "organizer": {
+    "email": "id.indonesian#holiday@group.v.calendar.google.com",
+    "displayName": "Hari libur di Indonesia",
+    "self": true
+   },
+   "start": {
+    "date": "2026-12-31"
+   },
+   "end": {
+    "date": "2027-01-01"
+   },
+   "transparency": "transparent",
+   "visibility": "public",
+   "iCalUID": "20261231_81bf5aec4jriue1nad6l34g8a8@google.com",
+   "sequence": 0,
+   "eventType": "default"
+  }
+ ]
+}

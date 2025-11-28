@@ -40,7 +40,7 @@ class Event {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    // Method untuk ambil semua events (tetap pertahankan yang ini)
+    // Method untuk ambil semua events
     public function getAllEvents() {
         $sql = "SELECT e.*, u.name as creator_name 
                 FROM events e 
@@ -112,6 +112,41 @@ class Event {
         $stmt = $this->db->conn->prepare($sql);
         $stmt->bind_param("ii", $event_id, $user_id);
         return $stmt->execute();
+    }
+
+    // Method untuk hapus event yang sudah lewat (auto-cleanup)
+    public function cleanupPastEvents() {
+        $sql = "DELETE FROM events WHERE event_date < CURDATE()";
+        return $this->db->conn->query($sql);
+    }
+    // Tambahkan method ini di class Event:
+    public function getTotalEvents() {
+        $sql = "SELECT COUNT(*) as total FROM events";
+        $result = $this->db->conn->query($sql);
+        $data = $result->fetch_assoc();
+        return $data['total'];
+    }
+
+    public function getTotalParticipants() {
+        $sql = "SELECT COUNT(*) as total FROM event_participants";
+        $result = $this->db->conn->query($sql);
+        $data = $result->fetch_assoc();
+        return $data['total'];
+    }
+
+    public function getRecentRegistrations($limit = 5) {
+        $sql = "SELECT ep.*, u.name, e.title 
+                FROM event_participants ep
+                JOIN users u ON ep.user_id = u.id
+                JOIN events e ON ep.event_id = e.id
+                ORDER BY ep.registered_at DESC 
+                LIMIT ?";
+        
+        $stmt = $this->db->conn->prepare($sql);
+        $stmt->bind_param("i", $limit);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 }
 ?>
