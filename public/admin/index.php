@@ -199,6 +199,17 @@ foreach ($events_by_month as $evt) {
                         </div>
                     </div>
 
+                    <?php if (isset($_GET['reminders_sent'])): ?>
+                        <div class="alert alert-info mt-3">Reminders created: <?= (int)$_GET['reminders_sent'] ?></div>
+                    <?php endif; ?>
+
+                    <div class="mb-3">
+                        <form method="GET" action="run_reminders.php" style="display:inline;">
+                            <button type="submit" class="btn btn-sm btn-primary">Run Reminders Now</button>
+                        </form>
+                        <small class="text-muted ms-2">(Triggers reminder notifications for events happening tomorrow)</small>
+                    </div>
+
                     <!-- Charts Row -->
                     <div class="row">
                         <div class="col-x0.5-12">
