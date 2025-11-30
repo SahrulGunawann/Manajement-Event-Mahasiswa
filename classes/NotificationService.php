@@ -53,6 +53,48 @@ class NotificationService {
         return $notificationCount;
     }
 
+    // Notify all non-admin users that a new event has been created
+    public function notifyAllUsersOnNewEvent($event_id) {
+        // get event details
+        $esql = "SELECT id, title, event_date, event_time, location FROM events WHERE id = ? LIMIT 1";
+        $estmt = $this->db->conn->prepare($esql);
+        $estmt->bind_param("i", $event_id);
+        $estmt->execute();
+        $eres = $estmt->get_result();
+        $event = $eres->fetch_assoc();
+        if (!$event) return 0;
+
+        $title = "New Event: " . $event['title'];
+        $message = "Ada event baru: " . $event['title'] . " pada " . date('d M Y', strtotime($event['event_date'])) . " " . $event['event_time'] . " di " . $event['location'];
+
+        // get all non-admin users
+        $usersSql = "SELECT id FROM users WHERE role != 'admin'";
+        $uStmt = $this->db->conn->prepare($usersSql);
+        $uStmt->execute();
+        $uRes = $uStmt->get_result();
+        $users = $uRes->fetch_all(MYSQLI_ASSOC);
+
+        $count = 0;
+        foreach ($users as $u) {
+            // check duplicate by title for today
+            $checkSql = "SELECT id FROM notifications WHERE user_id = ? AND title = ? LIMIT 1";
+            $checkStmt = $this->db->conn->prepare($checkSql);
+            $checkStmt->bind_param("is", $u['id'], $title);
+            $checkStmt->execute();
+            $checkStmt->store_result();
+            if ($checkStmt->num_rows > 0) continue;
+
+            $insertSql = "INSERT INTO notifications (user_id, title, message, type) VALUES (?, ?, ?, 'new_event')";
+            $insertStmt = $this->db->conn->prepare($insertSql);
+            $insertStmt->bind_param("iss", $u['id'], $title, $message);
+            if ($insertStmt->execute()) {
+                $count++;
+            }
+        }
+
+        return $count;
+    }
+
     // Get notifications untuk user
     public function getUserNotifications($user_id, $limit = 5) {
         $sql = "SELECT * FROM notifications 

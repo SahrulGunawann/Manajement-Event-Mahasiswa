@@ -43,12 +43,6 @@ if ($auth->isLoggedIn()) {
 }
 ?>
 
-// Redirect if already logged in
-if ($auth->isLoggedIn()) {
-    header('Location: dashboard.php');
-    exit;
-}
-?>
 
 <!DOCTYPE html>
 <html lang="id">

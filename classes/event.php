@@ -67,7 +67,10 @@ class Event {
                 VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->conn->prepare($sql);
         $stmt->bind_param("sssssii", $title, $description, $event_date, $event_time, $location, $max_participants, $created_by);
-        return $stmt->execute();
+        if ($stmt->execute()) {
+            return $this->db->conn->insert_id;
+        }
+        return false;
     }
 
     public function updateEvent($id, $title, $description, $event_date, $event_time, $location, $max_participants) {

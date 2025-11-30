@@ -2,6 +2,7 @@
 session_start();
 require_once __DIR__ . '/../../classes/Auth.php';
 require_once __DIR__ . '/../../classes/Event.php';
+require_once __DIR__ . '/../../classes/NotificationService.php';
 
 $auth = new Auth();
 if (!$auth->isLoggedIn() || !$auth->isAdmin()) {
@@ -25,9 +26,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($title) || empty($event_date) || empty($location)) {
         $error = 'Title, date, and location are required!';
     } else {
-        if ($event->createEvent($title, $description, $event_date, $event_time, $location, $max_participants, $_SESSION['user_id'])) {
+        $createdId = $event->createEvent($title, $description, $event_date, $event_time, $location, $max_participants, $_SESSION['user_id']);
+        if ($createdId) {
+            // Send notification to all users about the new event
+            $notificationService = new NotificationService();
+            $notificationService->notifyAllUsersOnNewEvent($createdId);
             // PRG pattern: redirect to self to avoid duplicate submission on refresh
-            header('Location: events.php?success=1');
+            header('Location: events.php?success=1&action=create');
             exit;
         } else {
             $error = 'Failed to create event!';
