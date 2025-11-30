@@ -126,23 +126,30 @@ if ($auth->isLoggedIn()) {
                             </ul>
                         </div>
                         <!-- Notification Bell -->
-                        <?php if ($auth->isLoggedIn() && !empty($userNotifications)): ?>
+                        <?php if ($auth->isLoggedIn()): ?>
                         <div class="nav-item dropdown">
+                            <?php $unreadCount = $notificationService->getUnreadCount($_SESSION['user_id']); ?>
                             <a class="nav-link position-relative" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown">
                                 🔔
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    <?= count($userNotifications) ?>
-                                </span>
+                                <?php if ($unreadCount > 0): ?>
+                                    <span id="notifCountBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        <?= $unreadCount ?>
+                                    </span>
+                                <?php endif; ?>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <?php foreach($userNotifications as $notif): ?>
-                                <li>
-                                    <a class="dropdown-item" href="#">
-                                        <strong><?= htmlspecialchars($notif['title']) ?></strong><br>
-                                        <small><?= htmlspecialchars($notif['message']) ?></small>
-                                    </a>
-                                </li>
-                                <?php endforeach; ?>
+                            <ul class="dropdown-menu dropdown-menu-end" id="notificationMenu">
+                                <?php if (!empty($userNotifications)): ?>
+                                    <?php foreach($userNotifications as $notif): ?>
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <strong><?= htmlspecialchars($notif['title']) ?></strong><br>
+                                            <small><?= htmlspecialchars($notif['message']) ?></small>
+                                        </a>
+                                    </li>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <li class="dropdown-item text-muted">No notifications</li>
+                                <?php endif; ?>
                             </ul>
                         </div>
                         <?php endif; ?>
@@ -281,6 +288,31 @@ if ($auth->isLoggedIn()) {
                 calendar.render();
             }
         });
+    </script>
+    <script>
+        // Hide notification badge when user opens the notification dropdown (mark as read)
+        (function() {
+            var notifDropdown = document.getElementById('notificationDropdown');
+            if (!notifDropdown) return;
+
+            notifDropdown.addEventListener('show.bs.dropdown', function () {
+                // Send request to mark notifications as read
+                fetch('mark_notifications_read.php', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                }).then(function(res) { return res.json(); })
+                .then(function(data) {
+                    if (data && data.success) {
+                        var badge = document.getElementById('notifCountBadge');
+                        if (badge) badge.remove();
+                    }
+                }).catch(function(err) {
+                    console.error('Failed to mark notifications read', err);
+                });
+            });
+        })();
     </script>
 </body>
 </html>

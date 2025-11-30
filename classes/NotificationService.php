@@ -115,5 +115,27 @@ class NotificationService {
         $stmt->bind_param("i", $notification_id);
         return $stmt->execute();
     }
+
+    // Mark all notifications for a user as read
+    public function markAllAsRead($user_id) {
+        $sql = "UPDATE notifications SET status = 'read' WHERE user_id = ? AND (status IS NULL OR status != 'read')";
+        $stmt = $this->db->conn->prepare($sql);
+        $stmt->bind_param("i", $user_id);
+        if ($stmt->execute()) {
+            return $this->db->conn->affected_rows;
+        }
+        return 0;
+    }
+
+    // Get count of unread notifications for a user
+    public function getUnreadCount($user_id) {
+        $sql = "SELECT COUNT(*) as cnt FROM notifications WHERE user_id = ? AND (status IS NULL OR status != 'read')";
+        $stmt = $this->db->conn->prepare($sql);
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $row = $res->fetch_assoc();
+        return (int) ($row['cnt'] ?? 0);
+    }
 }
 ?>
