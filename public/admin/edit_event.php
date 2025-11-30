@@ -9,9 +9,23 @@ if (!$auth->isLoggedIn() || !$auth->isAdmin()) {
     exit;
 }
 
-$event = new Event();
+$eventModel = new Event();
 $message = '';
 $error = '';
+
+// Get event ID from URL
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+    header('Location: events.php');
+    exit;
+}
+
+$event_id = (int) $_GET['id'];
+$event = $eventModel->getEventById($event_id);
+
+if (!$event) {
+    header('Location: events.php');
+    exit;
+}
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -25,31 +39,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($title) || empty($event_date) || empty($location)) {
         $error = 'Title, date, and location are required!';
     } else {
-        if ($event->createEvent($title, $description, $event_date, $event_time, $location, $max_participants, $_SESSION['user_id'])) {
-            // PRG pattern: redirect to self to avoid duplicate submission on refresh
-            header('Location: events.php?success=1');
+        if ($eventModel->updateEvent($event_id, $title, $description, $event_date, $event_time, $location, $max_participants)) {
+            // PRG pattern: redirect to events list with success message
+            header('Location: events.php?success=1&action=update');
             exit;
         } else {
-            $error = 'Failed to create event!';
+            $error = 'Failed to update event!';
         }
     }
 }
-
-// Display success message if redirected from POST/action
-$show_success = isset($_GET['success']) && $_GET['success'] == '1';
-if ($show_success) {
-    $action = $_GET['action'] ?? 'create';
-    if ($action === 'delete') {
-        $message = 'Event deleted successfully!';
-    } elseif ($action === 'update') {
-        $message = 'Event updated successfully!';
-    } else {
-        $message = 'Event created successfully!';
-    }
-}
-
-// Get all events for listing
-$all_events = $event->getAllEvents();
 ?>
 
 <!DOCTYPE html>
@@ -58,11 +56,10 @@ $all_events = $event->getAllEvents();
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Events Management - Admin</title>
+    <title>Edit Event - Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.css" rel="stylesheet" />
     <link href="assets/css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -118,9 +115,10 @@ $all_events = $event->getAllEvents();
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">Events Management</h1>
+                    <h1 class="mt-4">Edit Event</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Create and manage events</li>
+                        <li class="breadcrumb-item"><a href="events.php">Events Management</a></li>
+                        <li class="breadcrumb-item active">Edit Event</li>
                     </ol>
 
                     <?php if ($message): ?>
@@ -131,89 +129,45 @@ $all_events = $event->getAllEvents();
                     <?php endif; ?>
 
                     <div class="row">
-                        <div class="col-xl-4">
+                        <div class="col-xl-8">
                             <div class="card mb-4">
                                 <div class="card-header">
-                                    <i class="fas fa-plus me-1"></i>
-                                    Create New Event
+                                    <i class="fas fa-edit me-1"></i>
+                                    Edit Event: <?= htmlspecialchars($event['title']) ?>
                                 </div>
                                 <div class="card-body">
                                     <form method="POST">
                                         <div class="mb-3">
                                             <label class="form-label">Event Title</label>
-                                            <input type="text" class="form-control" name="title" required>
+                                            <input type="text" class="form-control" name="title" value="<?= htmlspecialchars($event['title']) ?>" required autocomplete="off">
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Description</label>
-                                            <textarea class="form-control" name="description" rows="3"></textarea>
+                                            <textarea class="form-control" name="description" rows="3" autocomplete="off"><?= htmlspecialchars($event['description']) ?></textarea>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label">Event Date</label>
-                                                <input type="date" class="form-control" name="event_date" required min="<?= date('Y-m-d') ?>">
+                                                <input type="date" class="form-control" name="event_date" value="<?= $event['event_date'] ?>" required autocomplete="off">
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label">Event Time</label>
-                                                <input type="time" class="form-control" name="event_time" value="14:00">
+                                                <input type="time" class="form-control" name="event_time" value="<?= htmlspecialchars($event['event_time']) ?>" autocomplete="off">
                                             </div>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Location</label>
-                                            <input type="text" class="form-control" name="location" required>
+                                            <input type="text" class="form-control" name="location" value="<?= htmlspecialchars($event['location']) ?>" required autocomplete="off">
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Max Participants</label>
-                                            <input type="number" class="form-control" name="max_participants" value="50" min="1">
+                                            <input type="number" class="form-control" name="max_participants" value="<?= htmlspecialchars($event['max_participants']) ?>" min="1" autocomplete="off">
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Create Event</button>
+                                        <div>
+                                            <button type="submit" class="btn btn-primary">Update Event</button>
+                                            <a href="events.php" class="btn btn-secondary">Cancel</a>
+                                        </div>
                                     </form>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-8">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-table me-1"></i>
-                                    All Events (<?= count($all_events) ?>)
-                                </div>
-                                <div class="card-body">
-                                    <?php if (!empty($all_events)): ?>
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Title</th>
-                                                        <th>Date</th>
-                                                        <th>Location</th>
-                                                        <th>Participants</th>
-                                                        <th>Actions</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php foreach($all_events as $evt): ?>
-                                                    <tr>
-                                                        <td><?= htmlspecialchars($evt['title']) ?></td>
-                                                        <td><?= date('d M Y', strtotime($evt['event_date'])) ?></td>
-                                                        <td><?= htmlspecialchars($evt['location']) ?></td>
-                                                        <td>
-                                                            <?php 
-                                                            $participants = $event->getEventParticipants($evt['id']);
-                                                            echo count($participants) . ' / ' . $evt['max_participants'];
-                                                            ?>
-                                                        </td>
-                                                        <td>
-                                                            <a href="edit_event.php?id=<?= $evt['id'] ?>" class="btn btn-sm btn-warning">Edit</a>
-                                                            <a href="delete_event.php?id=<?= $evt['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Delete this event?')">Delete</a>
-                                                        </td>
-                                                    </tr>
-                                                    <?php endforeach; ?>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    <?php else: ?>
-                                        <p class="text-muted">No events found.</p>
-                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>

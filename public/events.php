@@ -73,11 +73,6 @@ $all_events = $event->getAllEvents();
                                 📍 <?= htmlspecialchars($event['location']) ?>
                             </p>
                             <p class="card-text"><?= htmlspecialchars($event['description']) ?></p>
-                            <p class="card-text">
-                                <small class="text-muted">
-                                    Created by: <?= htmlspecialchars($event['creator_name']) ?>
-                                </small>
-                            </p>
                             <a href="event_detail.php?id=<?= $event['id'] ?>" class="btn btn-primary">Detail & Daftar</a>
                         </div>
                     </div>

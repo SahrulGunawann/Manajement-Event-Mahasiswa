@@ -21,12 +21,27 @@ $analytics = new AnalyticsService();
 // Data untuk dashboard
 $total_events = $event->getTotalEvents();
 $total_participants = $event->getTotalParticipants();
-$upcoming_events = $event->getUpcomingEvents(5);
+$upcoming_events = $event->getAllEvents();
 $recent_registrations = $event->getRecentRegistrations(5);
 
 // Data untuk charts
 $events_per_month = $analytics->getEventsPerMonth();
 $participants_per_event = $analytics->getParticipantsPerEvent();
+
+// Handle month selection for events vs participants chart
+$selected_month = isset($_GET['month']) ? (int)$_GET['month'] : date('m');
+$selected_year = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
+
+// Get events and participants for selected month
+$events_by_month = $event->getEventsByMonth($selected_month, $selected_year);
+$event_vs_participants = [];
+foreach ($events_by_month as $evt) {
+    $participants = $event->getEventParticipants($evt['id']);
+    $event_vs_participants[] = [
+        'title' => $evt['title'],
+        'participant_count' => count($participants)
+    ];
+}
 ?>
 
 <!DOCTYPE html>
@@ -42,6 +57,17 @@ $participants_per_event = $analytics->getParticipantsPerEvent();
     <link href="assets/css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .table-scroll {
+            max-height: 500px;
+            overflow-y: auto;
+            display: block;
+        }
+        .table-scroll table {
+            display: table;
+            width: 100%;
+        }
+    </style>
 </head>
 <body class="sb-nav-fixed">
     <!-- Navigation -->
@@ -175,25 +201,23 @@ $participants_per_event = $analytics->getParticipantsPerEvent();
 
                     <!-- Charts Row -->
                     <div class="row">
-                        <div class="col-xl-6">
+                        <div class="col-x0.5-12">
                             <div class="card mb-4">
                                 <div class="card-header">
                                     <i class="fas fa-chart-bar me-1"></i>
-                                    Events Per Month
+                                    Events & Participants Comparison
+                                    <form method="GET" style="display: inline; float: right;" class="d-inline">
+                                        <select name="month" onchange="this.form.submit()" class="form-select form-select-sm d-inline w-auto">
+                                            <?php for ($m = 1; $m <= 12; $m++): ?>
+                                                <option value="<?= $m ?>" <?= $m == $selected_month ? 'selected' : '' ?>>
+                                                    <?= date('F', mktime(0, 0, 0, $m, 1)) ?>
+                                                </option>
+                                            <?php endfor; ?>
+                                        </select>
+                                    </form>
                                 </div>
                                 <div class="card-body">
-                                    <canvas id="eventsChart" width="100%" height="40"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-6">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-chart-pie me-1"></i>
-                                    Participants Distribution
-                                </div>
-                                <div class="card-body">
-                                    <canvas id="participantsChart" width="100%" height="40"></canvas>
+                                    <canvas id="eventParticipantsChart" width="100%" height="40"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -203,9 +227,9 @@ $participants_per_event = $analytics->getParticipantsPerEvent();
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
-                            Recent Events
+                            All Events
                         </div>
-                        <div class="card-body">
+                        <div class="card-body table-scroll">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -258,45 +282,34 @@ $participants_per_event = $analytics->getParticipantsPerEvent();
     <script src="assets/js/scripts.js"></script>
     
     <script>
-        // Events Per Month Chart
-        const eventsCtx = document.getElementById('eventsChart').getContext('2d');
-        const eventsChart = new Chart(eventsCtx, {
+        // Events vs Participants Chart (Month selected)
+        const eventParticipantsCtx = document.getElementById('eventParticipantsChart').getContext('2d');
+        const eventParticipantsChart = new Chart(eventParticipantsCtx, {
             type: 'bar',
             data: {
-                labels: [<?php foreach($events_per_month as $month): ?>'<?= $month['month'] ?>',<?php endforeach; ?>],
+                labels: [<?php foreach($event_vs_participants as $e): ?>'<?= htmlspecialchars($e['title']) ?>',<?php endforeach; ?>],
                 datasets: [{
-                    label: 'Events',
-                    data: [<?php foreach($events_per_month as $month): ?><?= $month['count'] ?>,<?php endforeach; ?>],
-                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
+                    label: 'Participants',
+                    data: [<?php foreach($event_vs_participants as $e): ?><?= (int)$e['participant_count'] ?>,<?php endforeach; ?>],
+                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1
                 }]
             },
             options: {
                 scales: {
                     y: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true
                     }
                 }
-            }
-        });
-
-        // Participants Distribution Chart
-        const participantsCtx = document.getElementById('participantsChart').getContext('2d');
-        const participantsChart = new Chart(participantsCtx, {
-            type: 'pie',
-            data: {
-                labels: [<?php foreach($participants_per_event as $event): ?>'<?= $event['title'] ?>',<?php endforeach; ?>],
-                datasets: [{
-                    data: [<?php foreach($participants_per_event as $event): ?><?= $event['participant_count'] ?>,<?php endforeach; ?>],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.5)',
-                        'rgba(54, 162, 235, 0.5)',
-                        'rgba(255, 206, 86, 0.5)',
-                        'rgba(75, 192, 192, 0.5)',
-                        'rgba(153, 102, 255, 0.5)'
-                    ]
-                }]
             }
         });
     </script>
