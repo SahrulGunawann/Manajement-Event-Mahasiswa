@@ -77,7 +77,7 @@ if ($auth->isLoggedIn()) {
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
                             <input type="password" class="form-control" id="password" name="password" required>
-                        </div>git
+                        </div>
                         <button type="submit" class="btn btn-primary w-100">Login</button>
                     </form>
                     

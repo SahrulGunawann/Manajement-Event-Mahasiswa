@@ -101,57 +101,92 @@ if ($auth->isLoggedIn()) {
             border-radius: 10px 10px 0 0;
             margin-bottom: 20px;
         }
+        /* Notification popup animation */
+        .notif-popup {
+            transition: opacity 180ms ease, transform 180ms ease;
+            opacity: 0;
+            transform: translateY(-6px) scale(0.98);
+            will-change: opacity, transform;
+        }
+        .notif-popup.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        /* Ensure popup sits above other content */
+        #notifPopup {
+            z-index: 2000;
+        }
+        /* Keep notification icon fixed at right of navbar so it doesn't drop on mobile collapse */
+        .navbar .container { position: relative; }
+        .notif-wrapper { position: absolute; right: 12px; top: 8px; z-index: 2100; }
     </style>
 </head>
 <body>
     <div class="content">
         <!-- Navigation Bar -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-            <div class="container">
-                <a class="navbar-brand" href="index.php">🎯 Event Mahasiswa</a>
+            <div class="container d-flex align-items-center">
+                <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <a class="navbar-brand me-auto" href="index.php"  aria-label="Dashboard">🎯 Event Mahasiswa</a>
+
                 
-                <div class="navbar-nav ms-auto">
-                    <?php if ($auth->isLoggedIn()): ?>
-                        <!-- Tampilan setelah login -->
-                        <a class="nav-link" href="index.php">Dashboard</a>
-                        <a class="nav-link" href="events.php">Events</a>
-                        <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
-                                👋 <?= htmlspecialchars($_SESSION['user_name']) ?>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="profile.php">Profile</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
-                            </ul>
-                        </div>
-                        <!-- Notification Bell -->
-                        <?php if ($auth->isLoggedIn() && !empty($userNotifications)): ?>
-                        <div class="nav-item dropdown">
-                            <a class="nav-link position-relative" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown">
-                                🔔
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    <?= count($userNotifications) ?>
-                                </span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <?php foreach($userNotifications as $notif): ?>
-                                <li>
-                                    <a class="dropdown-item" href="#">
-                                        <strong><?= htmlspecialchars($notif['title']) ?></strong><br>
-                                        <small><?= htmlspecialchars($notif['message']) ?></small>
-                                    </a>
-                                </li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
+
+                <div class="collapse navbar-collapse flex-grow-1" id="mainNavbar">
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+                        <?php if ($auth->isLoggedIn()): ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="events.php">Events</a>
+                            </li>
+
+                            <li class="nav-item d-lg-none">
+                                <a class="nav-link" href="profile.php">Profile</a>
+                            </li>
+                            <li class="nav-item d-lg-none">
+                                <a class="nav-link" href="logout.php">Logout</a>
+                            </li>
+                            <!-- mobile Notifications link removed (icon remains visible) -->
+
+                            <li class="nav-item dropdown d-none d-lg-block ms-2">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                                    👋 <?= htmlspecialchars($_SESSION['user_name']) ?>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="profile.php">Profile</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                                </ul>
+                            </li>
+                        <?php else: ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="login.php">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="register.php">Register</a>
+                            </li>
                         <?php endif; ?>
-                    <?php else: ?>
-                        <!-- Tampilan sebelum login -->
-                        <a class="nav-link" href="login.php">Login</a>
-                        <a class="nav-link" href="register.php">Register</a>
-                    <?php endif; ?>
+                    </ul>
                 </div>
+
+                <?php if ($auth->isLoggedIn()): ?>
+                    <?php $unreadCount = $notificationService->getUnreadCount($_SESSION['user_id']); ?>
+                    <div class="notif-wrapper d-flex align-items-center">
+                        <button id="notifButton" class="btn btn-link text-light position-relative p-0" aria-label="Notifications" aria-haspopup="true" aria-expanded="false" role="button" type="button">
+                            <span class="fs-5">🔔</span>
+                            <?php if ($unreadCount > 0): ?>
+                                <span id="notifCountBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><?= $unreadCount ?></span>
+                            <?php endif; ?>
+                        </button>
+                        <div id="notifPopup" class="dropdown-menu dropdown-menu-end shadow p-0 notif-popup" role="menu" aria-labelledby="notifButton" tabindex="-1" style="display:none; min-width:320px;">
+                            <div id="notifPopupContent" class="p-2" tabindex="0">Loading...</div>
+                        </div>
+                    </div>
+                <?php endif; ?>
             </div>
         </nav>
 
@@ -200,11 +235,27 @@ if ($auth->isLoggedIn()) {
                             <div class="card event-card shadow">
                                 <div class="card-body">
                                     <h5 class="card-title"><?= htmlspecialchars($event_item['title']) ?></h5>
-                                    <p class="card-text text-muted">
-                                        📅 <?= date('d M Y', strtotime($event_item['event_date'])) ?><br>
-                                        ⏰ <?= $event_item['event_time'] ?><br>
-                                        📍 <?= htmlspecialchars($event_item['location']) ?>
-                                    </p>
+                                                                <p class="card-text text-muted">
+                                                                    📅 <?= date('d M Y', strtotime($event_item['event_date'])) ?><br>
+                                                                    ⏰ 
+                                                                    <?php
+                                                                        // Prefer original Google datetime if available (preserves timezone)
+                                                                        if (!empty($event_item['start_raw'])) {
+                                                                            try {
+                                                                                $dt = new DateTime($event_item['start_raw']);
+                                                                                // Format to local server time; you can change timezone as needed
+                                                                                $dt->setTimezone(new DateTimeZone(date_default_timezone_get()));
+                                                                                echo $dt->format('H:i');
+                                                                            } catch (Exception $e) {
+                                                                                echo htmlspecialchars($event_item['event_time']);
+                                                                            }
+                                                                        } else {
+                                                                            echo htmlspecialchars($event_item['event_time']);
+                                                                        }
+                                                                    ?>
+                                                                    <br>
+                                                                    📍 <?= htmlspecialchars($event_item['location']) ?>
+                                                                </p>
                                     <p class="card-text"><?= htmlspecialchars(substr($event_item['description'], 0, 100)) ?>...</p>
                                     
                                     <?php if ($auth->isLoggedIn()): ?>
@@ -281,6 +332,117 @@ if ($auth->isLoggedIn()) {
                 calendar.render();
             }
         });
+    </script>
+    <script>
+        // Notification popup behavior: fetch content and toggle popup near icon
+        (function(){
+            var notifButton = document.getElementById('notifButton');
+            var notifPopup = document.getElementById('notifPopup');
+            var notifContent = document.getElementById('notifPopupContent');
+
+            // If popup exists inside navbar, move it to body so it's not clipped by overflow
+            if (notifPopup && notifPopup.parentNode !== document.body) {
+                document.body.appendChild(notifPopup);
+            }
+
+            function closePopup() {
+                if (!notifPopup) return;
+                notifPopup.classList.remove('show');
+                if (notifButton) notifButton.setAttribute('aria-expanded', 'false');
+                // wait for CSS transition then hide
+                setTimeout(function(){ if (notifPopup) notifPopup.style.display = 'none'; }, 220);
+            }
+
+            function openPopup() {
+                if (!notifPopup || !notifButton) return;
+                var rect = notifButton.getBoundingClientRect();
+                notifPopup.style.position = 'absolute';
+                // make visible but hidden to measure
+                notifPopup.style.display = 'block';
+                notifPopup.style.visibility = 'hidden';
+                // compute width
+                var width = notifPopup.offsetWidth || 320;
+                var left = rect.right + window.scrollX - width;
+                // ensure not off-screen
+                left = Math.max(8, Math.min(left, window.innerWidth - width - 8));
+                notifPopup.style.left = left + 'px';
+                notifPopup.style.top = (rect.bottom + window.scrollY + 6) + 'px';
+                // animate
+                requestAnimationFrame(function(){
+                    notifPopup.style.visibility = 'visible';
+                    notifPopup.classList.add('show');
+                    if (notifButton) notifButton.setAttribute('aria-expanded', 'true');
+                    // move focus into first focusable element in popup (if any)
+                    setTimeout(function(){
+                        var firstLink = notifPopup.querySelector('a, button, [tabindex]:not([tabindex="-1"])');
+                        if (firstLink) firstLink.focus(); else notifPopup.focus();
+                    }, 60);
+                });
+            }
+
+            function fetchAndShow() {
+                if (!notifContent) return;
+                notifContent.innerHTML = 'Loading...';
+                fetch('get_notifications.php', { credentials: 'same-origin' })
+                .then(function(r){ return r.text(); })
+                .then(function(html){
+                    notifContent.innerHTML = html;
+                    openPopup();
+                }).catch(function(){
+                    notifContent.innerHTML = '<div class="p-3 text-muted">Failed to load</div>';
+                    openPopup();
+                });
+
+                // mark all as read and remove badges
+                fetch('mark_notifications_read.php', { method: 'POST', credentials: 'same-origin' })
+                .then(function(r){ return r.json(); })
+                .then(function(data){
+                    if (data && data.success) {
+                        var b = document.getElementById('notifCountBadge'); if (b) b.remove();
+                        var bm = document.getElementById('notifCountBadgeMobile'); if (bm) bm.remove();
+                    }
+                }).catch(function(){});
+            }
+
+            if (notifButton) {
+                notifButton.addEventListener('click', function(e){
+                    e.preventDefault();
+                    // toggle
+                    if (notifPopup.style.display === 'block') {
+                        closePopup();
+                    } else {
+                        fetchAndShow();
+                    }
+                });
+            }
+
+            // mobile collapsed menu no longer contains a Notifications text link;
+            // users should use the bell icon (always visible) to open notifications.
+
+            // keyboard accessibility
+            if (notifButton) {
+                notifButton.addEventListener('keydown', function(e){
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        if (notifPopup.style.display === 'block') closePopup(); else fetchAndShow();
+                    } else if (e.key === 'Escape') {
+                        closePopup();
+                    }
+                });
+            }
+
+            document.addEventListener('keydown', function(e){
+                if (e.key === 'Escape') closePopup();
+            });
+
+            // close popup on outside click
+            document.addEventListener('click', function(e){
+                if (!notifPopup || !notifButton) return;
+                if (notifPopup.style.display !== 'block') return;
+                if (notifPopup.contains(e.target) || notifButton.contains(e.target)) return;
+                closePopup();
+            });
+        })();
     </script>
 </body>
 </html>

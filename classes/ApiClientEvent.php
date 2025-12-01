@@ -4,7 +4,7 @@ require_once __DIR__ . '/../config/Database.php';
 class ApiClientEvent {
     private $apiKey;
     private $cacheDir = __DIR__ . '/../cache/';
-    private $cacheTtl = 3600; // 1 hour cache
+    private $cacheTtl = 3600; // default 1 hour cache, can be overridden by env
 
     public function __construct() {
         $this->apiKey = getenv('GOOGLE_CALENDAR_API_KEY');
@@ -15,11 +15,17 @@ class ApiClientEvent {
         }
     }
 
-    public function fetchEventsFromGoogle($calendarId = 'id.indonesian#holiday@group.v.calendar.google.com', $maxResults = 50) {
+    public function fetchEventsFromGoogle($calendarId = 'id.indonesian#holiday@group.v.calendar.google.com', $maxResults = 50, $forceRefresh = false) {
+        // allow overriding cache ttl via env
+        $envTtl = getenv('GOOGLE_CACHE_TTL');
+        if ($envTtl && is_numeric($envTtl)) {
+            $this->cacheTtl = (int)$envTtl;
+        }
+
         $cacheFile = $this->cacheDir . 'google_events_' . md5($calendarId) . '.json';
-        
-        // Check cache first
-        if (file_exists($cacheFile) && (time() - filemtime($cacheFile)) < $this->cacheTtl) {
+
+        // Check cache first (unless forced)
+        if (!$forceRefresh && file_exists($cacheFile) && (time() - filemtime($cacheFile)) < $this->cacheTtl) {
             return json_decode(file_get_contents($cacheFile), true);
         }
 
@@ -55,8 +61,8 @@ class ApiClientEvent {
         return $this->getDummyEvents();
     }
 
-    public function syncGoogleEventsToDatabase() {
-        $googleEvents = $this->fetchEventsFromGoogle();
+    public function syncGoogleEventsToDatabase($forceRefresh = false) {
+        $googleEvents = $this->fetchEventsFromGoogle(null, 50, $forceRefresh);
         
         if (!$googleEvents || !isset($googleEvents['items'])) {
             return false;
