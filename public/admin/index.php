@@ -67,13 +67,30 @@ foreach ($events_by_month as $evt) {
             display: table;
             width: 100%;
         }
+        /* Position navbar user section to the right */
+        .sb-topnav {
+            display: flex;
+            align-items: center;
+        }
+        .sb-topnav .navbar-brand {
+            flex-shrink: 0;
+            margin-right: auto;
+        }
+        .sb-topnav .navbar-nav {
+            margin-left: auto;
+            margin-right: 0;
+        }
+        .sb-topnav .dropdown-menu-end {
+            right: 0;
+            left: auto;
+        }
     </style>
 </head>
 <body class="sb-nav-fixed">
     <!-- Navigation -->
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <button class="btn btn-link btn-sm" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <a class="navbar-brand ps-3" href="index.php">Event Management Admin</a>
-        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
