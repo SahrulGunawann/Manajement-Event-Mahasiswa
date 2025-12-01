@@ -33,6 +33,9 @@ foreach ($events_by_month as $evt) {
     ];
 }
 
+// Get top popular events (by participant count)
+$top_events = $analytics->getParticipantsPerEvent();
+
 // Handle export request
 if (isset($_GET['export']) && $_GET['export'] == '1') {
     $filename = 'events_report_' . date('Ymd_His') . '.csv';
@@ -110,9 +113,12 @@ if (isset($_GET['export']) && $_GET['export'] == '1') {
     </style>
 </head>
 <body class="sb-nav-fixed">
+    <!-- Navigation -->
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <button class="btn btn-link btn-sm" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <a class="navbar-brand ps-3" href="index.php">Event Management Admin</a>
+        
+        <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -198,6 +204,42 @@ if (isset($_GET['export']) && $_GET['export'] == '1') {
                         </div>
                     </div>
 
+                    <!-- Most Popular Events -->
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="card mb-4">
+                                <div class="card-header d-flex align-items-center">
+                                    <i class="fas fa-fire me-1"></i>
+                                    Most Popular Events
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="mostPopularChart" width="100%" height="60"></canvas>
+
+                                    <div class="table-responsive mt-3">
+                                        <table class="table table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:40px;">#</th>
+                                                    <th>Event</th>
+                                                    <th style="width:120px;">Participants</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php $rank = 1; foreach ($top_events as $te): ?>
+                                                <tr>
+                                                    <td><?= $rank++ ?></td>
+                                                    <td><?= htmlspecialchars($te['title']) ?></td>
+                                                    <td><?= (int)$te['participant_count'] ?></td>
+                                                </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="footer py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
@@ -240,6 +282,31 @@ if (isset($_GET['export']) && $_GET['export'] == '1') {
                 }
             }
         });
+
+        // Most Popular Events Chart (horizontal)
+        (function() {
+            const mostLabels = <?php echo json_encode(array_column($top_events ?? [], 'title')); ?>;
+            const mostData = <?php echo json_encode(array_map('intval', array_column($top_events ?? [], 'participant_count'))); ?>;
+            const ctxMost = document.getElementById('mostPopularChart').getContext('2d');
+            new Chart(ctxMost, {
+                type: 'bar',
+                data: {
+                    labels: mostLabels,
+                    datasets: [{
+                        label: 'Participants',
+                        data: mostData,
+                        backgroundColor: 'rgba(255, 99, 132, 0.6)'
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    scales: {
+                        x: { beginAtZero: true, ticks: { stepSize: 1 } }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        })();
     </script>
 </body>
 </html>
