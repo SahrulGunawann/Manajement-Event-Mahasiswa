@@ -118,7 +118,7 @@ if ($auth->isLoggedIn()) {
         }
         /* Keep notification icon fixed at right of navbar so it doesn't drop on mobile collapse */
         .navbar .container { position: relative; }
-        .notif-wrapper { position: absolute; right: 12px; top: 8px; z-index: 2100; }
+        .notif-wrapper { margin-left: 20px; }
     </style>
 </head>
 <body>
@@ -154,7 +154,7 @@ if ($auth->isLoggedIn()) {
 
                             <li class="nav-item dropdown d-none d-lg-block ms-2">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
-                                    👋 <?= htmlspecialchars($_SESSION['user_name']) ?>
+                                    <?= htmlspecialchars($_SESSION['user_name']) ?>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li><a class="dropdown-item" href="profile.php">Profile</a></li>

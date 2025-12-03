@@ -18,6 +18,17 @@ if (!$auth->isAdmin()) {
 $event = new Event();
 $analytics = new AnalyticsService();
 
+// Get analytics summary dan recommendations
+$analytics_summary = $analytics->getAnalyticsSummary();
+$recommendations = $analytics->getRecommendations();
+
+// Get time series data (sesuai ketentuan)
+$event_trend = $analytics->getEventTrendData(6);
+$monthly_trend = $analytics->getMonthlyParticipationTrend();
+
+// Get category data for pie/bar chart (sesuai ketentuan)
+$category_data = $analytics->getParticipantsByCategory();
+
 // Handle month selection for events vs participants chart
 $selected_month = isset($_GET['month']) ? (int)$_GET['month'] : date('m');
 $selected_year = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
@@ -110,6 +121,20 @@ if (isset($_GET['export']) && $_GET['export'] == '1') {
             right: 0;
             left: auto;
         }
+        
+        /* Border left colors for cards */
+        .border-left-primary {
+            border-left: 0.25rem solid #4e73df !important;
+        }
+        .border-left-success {
+            border-left: 0.25rem solid #1cc88a !important;
+        }
+        .border-left-info {
+            border-left: 0.25rem solid #36b9cc !important;
+        }
+        .border-left-warning {
+            border-left: 0.25rem solid #f6c23e !important;
+        }
     </style>
 </head>
 <body class="sb-nav-fixed">
@@ -174,11 +199,130 @@ if (isset($_GET['export']) && $_GET['export'] == '1') {
                         <li class="breadcrumb-item active">Overview and export</li>
                     </ol>
 
+                    <!-- Analytics Summary Cards -->
+                    <div class="row mb-4">
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Event Bulan Ini</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $analytics_summary['events_this_month'] ?></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Peserta Aktif</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $analytics_summary['active_participants'] ?></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-users fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tipe Event Populer</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= htmlspecialchars($analytics_summary['popular_event_type']) ?></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-fire fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Rata-rata Peserta</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $analytics_summary['avg_participants'] ?></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-chart-line fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recommendations Section -->
+                    <?php if (!empty($recommendations)): ?>
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="card shadow">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">
+                                        <i class="fas fa-lightbulb me-2"></i>Rekomendasi Sistem
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <?php foreach ($recommendations as $rec): ?>
+                                    <div class="alert alert-<?= $rec['type'] === 'low_participation' ? 'warning' : 'info' ?> mb-2">
+                                        <strong><?= htmlspecialchars($rec['message']) ?></strong>
+                                        <br><small class="text-muted">Saran: <?= htmlspecialchars($rec['action']) ?></small>
+                                    </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+
                     <div class="mb-3">
                         <a href="analytics.php?export=1" class="btn btn-success"><i class="fas fa-file-excel"></i> Download Report (Excel)</a>
                     </div>
 
                     <!-- Charts Row -->
+                    <div class="row">
+                        <!-- Time Series Chart (sesuai ketentuan) -->
+                        <div class="col-xl-8">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-chart-area me-1"></i>
+                                    Time Series - Trend Event dan Peserta (6 Bulan Terakhir)
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="timeSeriesChart" width="100%" height="60"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Pie Chart (sesuai ketentuan) -->
+                        <div class="col-xl-4">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-chart-pie me-1"></i>
+                                    Kategori Event Populer
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="categoryPieChart" width="100%" height="60"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Second Charts Row -->
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="card mb-4">
@@ -243,7 +387,7 @@ if (isset($_GET['export']) && $_GET['export'] == '1') {
                     <div class="footer py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Event Management 2024</div>
+                        <div class="text-muted">Copyright © Event Management 2024</div>
                     </div>
                 </div>
             </footer>
@@ -252,6 +396,73 @@ if (isset($_GET['export']) && $_GET['export'] == '1') {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script>
+        // Time Series Chart (sesuai ketentuan)
+        const timeSeriesCtx = document.getElementById('timeSeriesChart').getContext('2d');
+        const timeSeriesLabels = <?php echo json_encode(array_column($event_trend ?? [], 'period_name')); ?>;
+        const timeSeriesEvents = <?php echo json_encode(array_column($event_trend ?? [], 'events_count')); ?>;
+        const timeSeriesParticipants = <?php echo json_encode(array_column($event_trend ?? [], 'total_participants')); ?>;
+        
+        new Chart(timeSeriesCtx, {
+            type: 'line',
+            data: {
+                labels: timeSeriesLabels,
+                datasets: [
+                    {
+                        label: 'Jumlah Event',
+                        data: timeSeriesEvents,
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        tension: 0.1
+                    },
+                    {
+                        label: 'Total Peserta',
+                        data: timeSeriesParticipants,
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        tension: 0.1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Pie Chart untuk Kategori (sesuai ketentuan)
+        const categoryPieCtx = document.getElementById('categoryPieChart').getContext('2d');
+        const categoryLabels = <?php echo json_encode(array_slice(array_column($category_data ?? [], 'item_name'), 0, 5)); ?>;
+        const categoryData = <?php echo json_encode(array_slice(array_column($category_data ?? [], 'participant_count'), 0, 5)); ?>;
+        
+        new Chart(categoryPieCtx, {
+            type: 'pie',
+            data: {
+                labels: categoryLabels,
+                datasets: [{
+                    data: categoryData,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)',
+                        'rgba(153, 102, 255, 0.8)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
         // Events vs Participants Chart (Month selected)
         const eventParticipantsCtx = document.getElementById('eventParticipantsChart').getContext('2d');
         const eventParticipantsChart = new Chart(eventParticipantsCtx, {
